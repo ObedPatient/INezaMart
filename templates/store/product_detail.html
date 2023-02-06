@@ -1,0 +1,123 @@
+{% extends 'nav.html' %}
+{% load static %}
+{% block title %}
+
+Myshop
+
+{% endblock title %}
+
+
+
+{% block body %}
+
+
+<div style="margin-top: 90px;">
+</div>
+
+  <section id="clients" class="clients clients">
+    <div class="container">
+
+      
+    </div>
+  </section><!-- End Clients Section -->
+
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            
+            
+            <div class="row">
+
+                <div class="box">
+                    <div class="images">
+                        <div class="img-holder">
+                            <img src="{{ single_product.image.url }}">
+                        </div>
+                        <!--<div class="img-holder">
+                            <img src="imgs/shoe_4.jpg">
+                        </div>
+                        <div class="img-holder">
+                            <img src="imgs/headphone.jpg">
+                        </div>
+                        <div class="img-holder">
+                            <img src="imgs/headphone.jpg">
+                        </div>-->
+                    </div>
+                    <div class="basic-info">
+                        <h1>{{ single_product.product_name }}</h1>
+                       
+                        <br>
+              
+                        <div class="product-price">RF {{ single_product.price }}</div>
+                
+                    <div class="description">
+                        <p>{{ single_product.description }}</p>
+                       <hr>
+                        <h5>Choose Color</h5>
+                       <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-light">
+                          <input type="radio" name="radio_color"> White
+                        </label>
+                        <label class="btn btn-light">
+                            <input type="radio" name="radio_color" checked> Gold 
+                          </label>
+                          <label class="btn btn-light">
+                            <input type="radio" name="radio_color"> Silver
+                          </label>
+                          <label class="btn btn-light">
+                            <input type="radio" name="radio_color"> Green
+                          </label>
+                      </div>
+                      <br><br>
+                      <h5>Select Size</h5>
+                       <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-light">
+                          <input type="radio" name="radio_color"> S
+                        </label>
+                        <label class="btn btn-light">
+                            <input type="radio" name="radio_color" checked> M 
+                          </label>
+                          <label class="btn btn-light">
+                            <input type="radio" name="radio_color"> L
+                          </label>
+                          <label class="btn btn-light">
+                            <input type="radio" name="radio_color"> XL
+                          </label>
+                      </div>
+                      <hr>
+                        <div class="options">
+                            {% if single_product.stock == 0 %}
+                            <h5 class="text-danger">Out Of Stock</h5>
+                            {% else %}
+                            <a href="#" class="btn btn-primary"><span class="text">Add to Cart</span>&nbsp;<i class="fas fa-shopping-cart"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <br><br>
+                <h1>Customer Review</h1>
+                <br>
+                <br>
+                <div class="review">
+                    <div class="rev-info">
+                        <img src="{% static 'assets/imgs/headphone.jpg' %}" alt="">&nbsp;&nbsp;
+                        <h6>Custom Review</h6><br>
+                        
+                    </div>
+                    <p style="margin: 20px;">orem ipsum, dolor sit amet consectetur adipisicing elit. Natus 
+                        temporibus corporis repudiandae, consectetur nostrum nisi commodi placeat
+                         rerum molestias numquam nihil accusantium deleniti! Enim, nesciunt a quis amet hic officia. 
+                         Lorem ipsum dolor sit amet 
+                        consectetur adipisicing elit. Molestiae nemo accusantium tempora facere doloremque cum iusto, ut nequ</p>
+                </div>
+        
+              </div>
+        
+            
+        </div> 
+    </div>
+</section>
+
+
+{% endblock body %}

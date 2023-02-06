@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, minimunm-scale=1" name="viewport" /> 
+
+  <title>{% block title %}{% endblock title %}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+ 
+
+<link rel="stylesheet" href="{% static 'assets/cssfiles/style.css' %}">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File  -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet"> 
+
+  {% block style %}
+
+   <style>
+    .cart-icon{
+      width: 25px;
+      display: inline-block;
+    }
+
+    .cart-total{
+      display: block;
+      text-align: center;
+      color: #fff;
+      background-color: red;
+      width: 20px;
+      height: 25px;
+      border-radius: 50%;
+      font-size: 14px;
+    }
+
+   
+    .box-element{
+        box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .product{
+        border-radius: 0 0 4px 4px;
+    }
+
+    .thumbnail{
+        width: 100%;
+        height: 200px;
+        box-shadow: -1px -3px 5px -2px rgba(rgb(170, 170, 170), rgb(124, 124, 124), rgb(196, 196, 196), 0);
+    }
+
+    .cart-row{
+      display: flex;
+      align-items: flex-stretch;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ececec;
+    }
+
+    .quantity{
+      display: inline-block;
+      font-weight: 700;
+      padding-right: 10px;
+    }
+    .row-image{
+      width: 100px;
+    }
+
+    .chg-quantity{
+      width: 12px;
+      cursor: pointer;
+      display: block;
+      margin-top: 5px;
+      transition: .1s;
+    }
+    .chg-quantity:hover{
+      opacity: .6;
+    }
+
+    .form-field{
+      width: 250px;
+      display: inline-block;
+      padding: 5px;
+    }
+
+    .hidden{
+      display: none !important;
+    }
+
+
+    .dropdown{
+      position: relative;
+    }
+
+    .dropdown-menu{
+      position: absolute;
+    }
+   </style>
+
+  {% endblock style %}
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="{% url 'index' %}">Vesperr</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      <button class="nav-item dropdown btn btn-outline-primary">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvFlO0RAUEQRN9FQAhkQASIgFCIhFDIgAgIgQyIgBp1q7ZGrZ2aujn78/ajp7v6XUPwaoLfp3eBIzAruJK9RbY3ArbApP12ATbANb+vHTwrkaXz8vgZGKrzd2Cai3gF9sCyMMwBWKU9r4BMOigISETjSIEbIBG+l9dBeEQyobRGx/RoW/Vpknbwq6YnYK5qulM1Xddq2jnYvZMsDiyEmonXDqyEWon/qqm1fm4BK6EhAjmhboHwiKyEuh2kmtYINRP/F9A6/V2EO3gBCKM8GWhSNmkAAAAASUVORK5CYII="/>&nbsp;All Category&nbsp;</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'purchase' %}">All Products </a>
+          {% for category in links %}
+           <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+          {% endfor %}
+        </div>
+      </button>
+    
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="/">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'purchase' %}">Purchase</a></li>
+          <li><a class="nav-link scrollto" href="/about">About</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </li>
+          
+          <li><a class="nav-link scrollto" href="/checkout">Checkout</a></li>
+          <li><a class="nav-link scrollto" href="#pricing">Tracker</a></li>
+
+          
+
+           
+          {% if request.user.is_authenticated %}
+           
+          <a href="#">
+            <img src="{% static 'assets/images/R.png' %}" alt="" class="cart-icon">
+          </a>
+
+          <p style="background-color: red; color: #fff;border-radius: 50%;width: 20px;height: 25px;text-align: center;">0</p>
+
+
+
+          <li><a class="getstarted scrollto">Welcome  {{user.username}}</a></li>
+          <li><a class="nav-link scrollto" href="/Myshopauth/logout/">Logout</a></li>
+          {% else %}
+        <li><a class="nav-link scrollto" href="/Myshopauth/login/">SignIn</a></li>
+        {% endif %}
+      </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  
+
+  <main id="main">
+
+    {% block body %}
+    {% endblock body %}  
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row d-flex align-items-center">
+        <div class="col-lg-6 text-lg-left text-center">
+          <div class="copyright">
+            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+            <a href="#intro" class="scrollto">Home</a>
+            <a href="#about" class="scrollto">About</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+  <script src="{% static 'assets/js/main.js' %}"></script> 
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  {% block script %}
+
+
+  
+  {% endblock script %}
+
+</body>
+
+</html>

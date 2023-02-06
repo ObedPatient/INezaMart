@@ -1,0 +1,259 @@
+{% extends 'nav.html' %}
+{% load static %}
+{% block title %}
+
+Myshop
+
+{% endblock title %}
+{% block style %}
+
+    
+<style>
+    .box-element{
+        box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .product{
+        border-radius: 0 0 4px 4px;
+    }
+
+    .thumbnail{
+        width: 100%;
+        height: 200px;
+        box-shadow: -1px -3px 5px -2px rgba(rgb(170, 170, 170), rgb(124, 124, 124), rgb(196, 196, 196), 0);
+    }
+   
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+*
+{
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body
+{
+    font-family: 'Roboto', sans-serif;
+}
+a
+{
+    text-decoration: none;
+}
+.product-card {
+    width: 100%;
+    position: relative;
+    box-shadow: 0 2px 7px #dfdfdf;
+    margin: 50px auto;
+    background: #fafafa;
+}
+
+.badge {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    background: red;
+    color: #fff;
+    padding: 3px 10px;
+}
+
+.product-tumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    padding: 50px;
+    background: #f0f0f0;
+}
+
+.product-tumb img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.product-details {
+    padding: 30px;
+}
+
+.product-catagory {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 18px;
+}
+
+.product-details h4 a {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    color: #363636;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.product-details h4 a:hover {
+    color: #fbb72c;
+}
+
+.product-details p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #999;
+}
+
+.product-bottom-details {
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.product-bottom-details div {
+    float: left;
+    width: 50%;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #fbb72c;
+    font-weight: 600;
+}
+
+.product-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.product-links {
+    text-align: right;
+}
+
+.product-links a {
+    display: inline-block;
+    margin-left: 5px;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.product-links a:hover {
+    color: #fbb72c;
+}
+</style>
+
+{% endblock style %}
+
+{% block body %}
+
+
+<section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">Grow your business with Vesperr</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2>
+          <div data-aos="fade-up" data-aos-delay="800">
+            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+          <img src="{% static 'assets/img/hero-img.png' %}" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <section id="clients" class="clients clients">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <img src="{% static 'assets/img/clients/client-1.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <img src="{% static 'assets/img/clients/client-2.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <img src="{% static 'assets/img/clients/client-3.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <img src="{% static 'assets/img/clients/client-4.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="300">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <img src="{% static 'assets/img/clients/client-5.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="400">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <img src="{% static 'assets/img/clients/client-6.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="500">
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Clients Section -->
+
+<section class="section-content padding-y">
+    <div class="container">
+
+        <header class="section-heading">
+            <a href="{% url 'purchase' %}" class="btn btn-outline-primary float-right">See All</a>
+            <h3 class="section-title" style="margin-right: 1000px;">Popular Product</h3>
+        </header>
+        <div class="row">
+            
+            
+
+                <div class="row">
+
+                 {% for p in products %}
+                    <div class="col-lg-4">
+                        <div class="product-card">
+                            <div class="badge">Hot</div>
+                            <a href="{{ p.get_url }}">
+                                <div class="product-tumb">
+                                    <img src="{{ p.image.url }}" alt="">
+                                </div>
+                            </a>
+                            <div class="product-details">
+                                <span class="product-catagory">{{ p.category }}</span>
+                                <h4><a href="{{ p.get_url }}">{{ p.product_name }}</a></h4>
+                                <p>{{ p.description }}</p>
+                                <div class="product-bottom-details">
+                                    <div class="product-price"><small>$96.00</small>RF{{ p.price }}</div>
+                                    <div class="product-links">
+                                        <a href=""><i class="fa fa-heart"></i></a>
+                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+             
+            
+        </div> 
+    </div>
+</section>
+
+
+
+{% endblock body %}

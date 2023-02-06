@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+.review{
+    width: 950px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 12%);
+}
+.rev-info{
+    display: flex;
+    width: 150px;
+    align-items: center;
+}
+
+.review img{
+    width: 25px;
+    border-radius: 20px;
+}
+
+
+.box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 1px rgb(0, 0, 0, 12%);
+    padding: 45px;
+    margin: 15px 0;
+    width: 950px;
+    display: flex;
+    flex-direction: row;
+}
+.box .images .img-holder img{
+    width: 475px ;
+    border-radius: 10px;
+}
+.images{
+    margin-right: 35px;
+}
+.product-price {
+    font-size: 18px;
+    color: #fbb72c;
+    font-weight: 600;
+}
+
+.product-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.box .description p{
+    margin-right: 5px;
+}
+
+
+.box .basic-info h1 {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #363636;
+}

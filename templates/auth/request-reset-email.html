@@ -1,0 +1,81 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+
+Myshop Rest Password
+
+{% endblock title %}
+
+{% block style%}
+
+<style>
+    .btn{
+        font-family: "Raleway", sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 1px;
+        display: inline-block;
+        padding: 10px 30px;
+        border-radius: 50px;
+        transition: 0.5s;
+        color: #3498db;
+        border: 2px solid #3498db;
+    }
+    .btn:hover{
+        background-color: black;
+        color: white;
+    }
+</style>
+
+{% endblock style %}
+
+{% block body %}
+
+<section id="contact" class="contact">
+    <div class="container">
+
+      <div class="section-title" data-aos="fade-up">
+
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-4">
+    <br>
+    <h1 data-aos="fade-up">Request a Reset Link </h1>
+<div class="container" data-aos="fade-up" data-aos-delay="400">
+
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong></strong>{{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+
+<form action="/Myshopauth/request-reset-email/" method="post">{% csrf_token %}
+    <br>
+    <label for="email">E-mail</label>
+    <div class="form-group">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+    </div>
+    <br>
+    <button type="submit" class="btn">Submit</button>
+
+    <hr>
+    <a href="/Myshopauth/login/">Go back?</a><br>
+</form>
+</div>
+
+
+
+
+
+</div>
+<div class="col-md-6"></div>
+
+</div>
+</div>
+</div>
+</section>
+
+
+{% endblock body %}
