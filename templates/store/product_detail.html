@@ -43,6 +43,8 @@ Myshop
                             <img src="imgs/headphone.jpg">
                         </div>-->
                     </div>
+                      <form action="{% url 'add_cart' single_product.id %}" method="POST">
+                        {% csrf_token %}
                     <div class="basic-info">
                         <h1>{{ single_product.product_name }}</h1>
                        
@@ -50,49 +52,34 @@ Myshop
               
                         <div class="product-price">RF {{ single_product.price }}</div>
                 
-                    <div class="description">
+                     <div class="description">
                         <p>{{ single_product.description }}</p>
                        <hr>
                         <h5>Choose Color</h5>
-                       <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-light">
-                          <input type="radio" name="radio_color"> White
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="radio_color" checked> Gold 
-                          </label>
-                          <label class="btn btn-light">
-                            <input type="radio" name="radio_color"> Silver
-                          </label>
-                          <label class="btn btn-light">
-                            <input type="radio" name="radio_color"> Green
-                          </label>
-                      </div>
+                       <select name="color" class="custom-select" required>
+                        <option value="" disabled selected>Select Color..</option>
+                        {% for c in single_product.variation_set.colors %}
+                        <option value="{{ c.variation_value | lower }}">{{ c.variation_value | capfirst }}</option>
+                        {% endfor %}
+                       </select>
                       <br><br>
                       <h5>Select Size</h5>
-                       <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-light">
-                          <input type="radio" name="radio_color"> S
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="radio_color" checked> M 
-                          </label>
-                          <label class="btn btn-light">
-                            <input type="radio" name="radio_color"> L
-                          </label>
-                          <label class="btn btn-light">
-                            <input type="radio" name="radio_color"> XL
-                          </label>
-                      </div>
+                      <select name="size" class="custom-select" required>
+                        <option value="" disabled selected>Select Size..</option>
+                        {% for c in single_product.variation_set.sizes %}
+                        <option value="{{ c.variation_value | lower }}">{{ c.variation_value | capfirst }}</option>
+                        {% endfor %}
+                       </select>
                       <hr>
                         <div class="options">
                             {% if single_product.stock == 0 %}
                             <h5 class="text-danger">Out Of Stock</h5>
                             {% else %}
-                            <a href="#" class="btn btn-primary"><span class="text">Add to Cart</span>&nbsp;<i class="fas fa-shopping-cart"></i></a>
+                            <button type="submit" class="btn btn-primary"><span class="text">Add to Cart</span>&nbsp;<i class="fas fa-shopping-cart"></i></button>
                             {% endif %}
                         </div>
                     </div>
+                  </form>
                 </div>
             </div>
                 <br><br>

@@ -163,14 +163,14 @@ a
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">Grow your business with Vesperr</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2>
+          <h1 data-aos="fade-up">Shop With US.</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400"></h2>
           <div data-aos="fade-up" data-aos-delay="800">
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-          <img src="{% static 'assets/img/hero-img.png' %}" class="img-fluid animated" alt="">
+          <img src="{% static 'assets/img/hero.png' %}" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -216,7 +216,7 @@ a
 
         <header class="section-heading">
             <a href="{% url 'purchase' %}" class="btn btn-outline-primary float-right">See All</a>
-            <h3 class="section-title" style="margin-right: 1000px;">Popular Product</h3>
+            <h3 class="section-title" style="margin-right: 800px;">Popular Product</h3>
         </header>
         <div class="row">
             
@@ -238,10 +238,10 @@ a
                                 <h4><a href="{{ p.get_url }}">{{ p.product_name }}</a></h4>
                                 <p>{{ p.description }}</p>
                                 <div class="product-bottom-details">
-                                    <div class="product-price"><small>$96.00</small>RF{{ p.price }}</div>
+                                    <div class="product-price">RF{{ p.price }}</div>
                                     <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
+                                        <!--<a href=""><i class="fa fa-heart"></i></a>-->
+                                        <a href="{{ p.get_url }}"><i class="fas fa-eye"></i></a>
                                     </div>
                                 </div>
                             </div>
