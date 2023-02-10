@@ -8,24 +8,6 @@ Myshop Login
 
 {% block style%}
 
-<style>
-    .btn{
-        font-family: "Raleway", sans-serif;
-        font-weight: 500;
-        font-size: 16px;
-        letter-spacing: 1px;
-        display: inline-block;
-        padding: 10px 30px;
-        border-radius: 50px;
-        transition: 0.5s;
-        color: #3498db;
-        border: 2px solid #3498db;
-    }
-    .btn:hover{
-        background-color: black;
-        color: white;
-    }
-</style>
 
 {% endblock style %}
 
@@ -39,7 +21,7 @@ Myshop Login
 <div class="row">
 <div class="col-md-2"></div>
 <div class="col-md-4">
-    <br>
+    <br><br>
     <h1 data-aos="fade-up">Login</h1>
 <div class="container" data-aos="fade-up" data-aos-delay="400">
 
@@ -62,7 +44,7 @@ Myshop Login
         <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter Password" required>
     </div>
     <br>
-    <button type="submit" class="btn">Login</button>
+    <button type="submit" class="btn btn-primary">Login</button>
 
     <hr>
     Not Already User? <a href="/Myshopauth/signup/">Signup</a><br>

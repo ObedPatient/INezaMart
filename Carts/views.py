@@ -69,8 +69,8 @@ def add_cart(request, product_id):
     else:
         cart_item = CartItem.objects.create(product=product, quantity = 1, cart=cart)
         if len(product_variation) > 0:
-            item.variations.clear()
-            item.variations.add(*product_variation) 
+            cart_item.variations.clear()
+            cart_item.variations.add(*product_variation) 
         cart_item.save()
     return redirect('cart')
 

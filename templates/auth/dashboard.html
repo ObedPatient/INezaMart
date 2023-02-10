@@ -1,0 +1,81 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+
+Myshop
+
+{% endblock title %}
+
+{% block style%}
+
+{% endblock style %}
+
+{% block body %}
+
+<section class="section-content padding-y">
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <aside class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item">My order History</li>
+                    <li class="list-group-item">My order History</li>
+                    <li class="list-group-item">My order History</li>
+                    <li class="list-group-item">My order History</li>
+                </ul>
+                <br>
+
+                <a href="" class="btn btn-light btn-block"><i class="fa fa-power-off"><span class="text">&nbsp;Log Out</span></i></a>
+            </aside>
+            <main class="col-md-9">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Order Id: u7834735353</strong>
+                        <span>Order Date: 16 December 2023</span> 
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-muted">Delivery To</h6>
+                                <p>Micheal Jackson <br>
+                                Phone +250789278495 Email: lobedpatient@gmail.com <br>
+                                Location: Home number, Building name, Street 123, <br>
+                                P.O. Box 100123
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6 class="text-muted">Payment</h6>
+                                <span class="text-success">
+                                    <i class="fa fa-lg fa-cc-visa">
+                                        Visa **** 4216
+                                    </i>
+                                </span>
+                                <p>Subtotal: $356 <br>
+                                Shipping Fee: $56 <br>
+                                <span class="b">Total: $456</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tr>
+                                <td width="65">
+                                    <img src="" alt="" class="img-xs border">
+                                </td>
+                                <td>
+                                    <p class="title mb-0">Product name</p>
+                                    <var class="price text-muted">USD 145</var>
+                                </td>
+                                <td>Seller <br>Nike Cliothing</td>
+                                <td width="250"><a href="" class="btn btn-outline-primary">Track Order</a><a href="" class="btn btn-light">Detail</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+
+
+{% endblock body %}

@@ -174,13 +174,22 @@
 
           <p style="background-color: red; color: #fff;border-radius: 50%;width: 20px;height: 25px;text-align: center;">{{cart_count}}</p>
 
+          {% if request.user.is_authenticated %}
 
+          <li><a href="#" class="getstarted scrollto btn-outline-primary" style="color: white;"><strong>welcome {{user.username|truncatechars:6}}</strong></a></li>
 
-          <li><a class="getstarted scrollto">Welcome</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'handlelogout' %}">Logout</a></li>
           
-        <li><a class="nav-link scrollto" href="#">SignIn</a></li>
+        
        
+        {% else %}
+        <li><a class="nav-link scrollto" href="{% url 'handlelogin' %}">SignIn</a></li>
+          
+        {% endif %}
+        
       </ul>
+     
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
