@@ -25,7 +25,7 @@ Myshop
     <div class="container">
 
         {% if not cart_items %}
-            <h2 class="text-center">Yor Shopping Cart Is Empty</h2>
+            <h2 class="text-center">Your Shopping Cart Is Empty</h2>
             <br>
             <div class="text-center">
                 <a href="{% url 'purchase' %}" class="btn btn-primary">&leftarrow;&nbsp;Continue Shopping</a>
@@ -58,19 +58,20 @@ Myshop
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="input-group-prepend">
-                                        <a href="{% url 'delete_cart' cart_item.product.id cart_item.id %}" class="btn btn-light" id="button-minus"><img src="{% static 'assets/img/arrow-up.png' %}" alt=""></i></a>
-                                        </div>
-                                            <button href="#" class="btn btn-light" style="margin-left: 3px; margin-top: 4px; margin-bottom: 4px;">{{ cart_item.quantity }}</button>
-                                   
-                                    
                                     <form action="{% url 'add_cart' cart_item.product.id %}" method="POST">
                                         {% csrf_token %}
                                         {% for item in cart_item.variations.all %}
                                         <input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
                                         {% endfor %}
-                                        <button class="btn btn-light" type="submit" id="button-minus" ><img src="{% static 'assets/img/arrow-down.png' %}" alt=""></button>
+                                        <button class="btn btn-light" type="submit" id="button-minus" ><img src="{% static 'assets/img/arrow-up.png' %}" alt=""></button>
                                     </form>
+                                    
+                                        <a href="#" class="btn btn-light" style="margin-left: 3px; margin-top: 4px; margin-bottom: 4px;">{{ cart_item.quantity }}</a>
+                                        <div class="input-group-prepend">
+                                            <a href="{% url 'delete_cart' cart_item.product.id cart_item.id %}" class="btn btn-light" id="button-minus"><img src="{% static 'assets/img/arrow-down.png' %}" alt=""></i></a>
+                                            </div>
+                                    
+                                    
                                     
                                 </div>
                                 <div class="col">RWF {{ cart_item.sub_total }} <span class="close"><a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you Sure You Wnt To Delete Item ?')">&#10005;</a></span></div>
@@ -92,7 +93,7 @@ Myshop
                             <p class="text-center mb-3 mt-4">
                                 <img src="{% static 'assets/images/payments.png' %}" alt="">
                             </p>
-                        <button class="btn btn-primary btn-block">CHECKOUT</button>
+                        <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">CHECKOUT</a>
                         <a href="{% url 'purchase' %}" class="btn btn-light btn-block">&leftarrow;&nbsp;Continue Shopping</a>
                     </div>
                 

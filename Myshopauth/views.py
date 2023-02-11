@@ -3,7 +3,7 @@ from django.shortcuts import HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.views.generic import View
 from django.contrib.auth import authenticate,login,logout
-from django.contrib import messages
+from django.contrib import messages, auth
 # to Activate user accounts
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
@@ -24,7 +24,7 @@ from django.core.mail import EmailMessage
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.decorators import login_required
-
+from Carts.views import _cart_id
 # threading
   
 import threading
@@ -103,8 +103,20 @@ def handlelogin(request):
 
 
         if myuser is not None:
-            login(request,myuser)
-            return render(request, 'index.html')
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+
+                    for item in cart_item:
+                        item.user = user
+                        item.save()
+
+            except:
+                pass
+            auth.login(request,myuser)
+            return redirect('index')
 
         else:
             messages.error(request, "Invalid")
