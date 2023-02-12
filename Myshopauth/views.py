@@ -25,8 +25,9 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.decorators import login_required
 from Carts.views import _cart_id
+from Carts.models import Cart, CartItem
 # threading
-  
+import requests
 import threading
 
 class EmailThread(threading.Thread):
@@ -108,28 +109,79 @@ def handlelogin(request):
                 is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
                 if is_cart_item_exists:
                     cart_item = CartItem.objects.filter(cart=cart)
-
+                    request.session['cart_id'] = cart.id
+                    
+                    # Getting the product variation by cart_id
+                    product_variation = []
                     for item in cart_item:
-                        item.user = user
-                        item.save()
+                        variation = item.variations.all()
+                        product_variation.append(list(variation))
+
+
+
+                    # Get the cart items from user to access his product variations
+
+                    cart_item = CartItem.objects.filter(user=myuser)
+                    ex_var_list = []
+                    id = []
+                    for item in cart_item:
+                        existing_variation = item.variations.all()
+                        ex_var_list.append(list(existing_variation))
+                        id.append(item.id)
+
+
+                    for pr in product_variation:
+                        if pr in ex_var_list:
+                            index = ex_var_list.index(pr)
+                            item_id = id[index]
+                            item = CartItem.objects.get(id=item_id)
+                            item.quantity += 1
+                            item.user = myuser
+                            item.save()
+                        else:
+                            cart_item = CartItem.objects.filter(cart=cart)
+                            for item in cart_item:
+                                item.user = myuser
+                                item.save()
+
+                    #for item in cart_item:
+                    #    item.user = myuser
+                    #    item.save()
 
             except:
                 pass
             auth.login(request,myuser)
-            return redirect('index')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)               
+            except:
+                 return redirect('index')
 
         else:
-            messages.error(request, "Invalid")
-            return redirect('Myshopauth/login')
+            messages.error(request, "Invalid Credentials!!")
+            return redirect('handlelogin')
 
     return render(request, 'auth/login.html')
 
 
 @login_required(login_url = 'login')
 def handlelogout(request):
-    logout(request)
-    messages.success(request,"You Are Logged Out")
-    return redirect('/Myshopauth/login')
+    cart_id = request.session.get('cart_id')
+
+    if cart_id:
+        try:
+            cart = Cart.objects.get(id=cart_id)
+            cart.cart_id = _cart_id(request)
+            cart.save()
+        except:
+            pass
+
+    auth.logout(request)
+    return redirect('index')
 
 
 class RequestRestEmailView(View):
@@ -157,7 +209,7 @@ class RequestRestEmailView(View):
             return render(request,'auth/request-reset-email.html')
 
 
-class SetNewPasswordView(View):
+class SetNewPasswordView(View): 
     def get(self,request,uidb64,token):
         context = {
             'uidb64':uidb64,
