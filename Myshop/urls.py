@@ -28,4 +28,8 @@ urlpatterns = [
     path('Myshopapp/', include('Myshopapp.urls')),
     path('Carts/', include('Carts.urls')),
     path('Myshopauth/', include('Myshopauth.urls')),
+
+    # orders
+
+    path('Orders/', include('Orders.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

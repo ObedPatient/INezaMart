@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Myshopauth',
     'category',
     'Carts',
+    'Orders',
 ]
 
 MIDDLEWARE = [

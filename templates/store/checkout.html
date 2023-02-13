@@ -32,7 +32,7 @@ CHECKOUT
                               <h3 class="card-title">Billing Address</h3>
                               <br><br>
                        
-                                <form action="" method="POST">
+                                <form action="{% url 'place_order' %}" method="POST">
                                     {% csrf_token %}
                                     <div class="form-row">
                                         <div class="col form-group">
@@ -59,11 +59,11 @@ CHECKOUT
                                     <div class="form-row">
                                         <div class="col form-group">
                                             <label for="">Address Line 1</label>
-                                            <input type="email" name="address1" class="form-control" required>
+                                            <input type="text" name="address_line_1" class="form-control" required>
                                         </div>
                                         <div class="col form-group">
                                             <label for="">Address Line 2</label>
-                                            <input type="text" name="address2" class="form-control">
+                                            <input type="text" name="address_line_2" class="form-control">
                                         </div>                                  
                                     </div>
 
@@ -74,7 +74,7 @@ CHECKOUT
                                         </div>
                                         <div class="col form-group">
                                             <label for="">Province</label>
-                                            <input type="text" name="country" class="form-control" required>
+                                            <input type="text" name="state" class="form-control" required>
                                         </div>
                                         <div class="col form-group">
                                             <label for="">Country</label>
