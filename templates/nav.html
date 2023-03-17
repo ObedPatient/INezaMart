@@ -9,7 +9,8 @@
   <title>{% block title %}{% endblock title %}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  
+  
   <!-- Favicons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -18,7 +19,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
  
-
+  
 <link rel="stylesheet" href="{% static 'assets/cssfiles/style.css' %}">
 
   <!-- Google Fonts -->
@@ -32,12 +33,13 @@
   <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
  
   
 
   <!-- Template Main CSS File  -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet"> 
-
+  <script src="https://www.paypal.com/sdk/js?client-id=AUUL2CTyFlPBnvwz5h0J9iW_FYPK2_92z-t-hS2LFXhk2MmycXedaiZePRLZyB4LOB8PBhHi9EtKuZP5&currency=USD"></script>
   {% block style %}
 
    <style>
@@ -132,12 +134,12 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo" style="margin-right: 20px;">
-        <h1><a href="{% url 'index' %}">Vesperr</a></h1>
+        <h1><a href="{% url 'index' %}">IHAHO</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>&nbsp;&nbsp;
       <button class="nav-item dropdown btn btn-outline-primary">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvFlO0RAUEQRN9FQAhkQASIgFCIhFDIgAgIgQyIgBp1q7ZGrZ2aujn78/ajp7v6XUPwaoLfp3eBIzAruJK9RbY3ArbApP12ATbANb+vHTwrkaXz8vgZGKrzd2Cai3gF9sCyMMwBWKU9r4BMOigISETjSIEbIBG+l9dBeEQyobRGx/RoW/Vpknbwq6YnYK5qulM1Xddq2jnYvZMsDiyEmonXDqyEWon/qqm1fm4BK6EhAjmhboHwiKyEuh2kmtYINRP/F9A6/V2EO3gBCKM8GWhSNmkAAAAASUVORK5CYII="/>&nbsp;All Category&nbsp;</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvFlO0RAUEQRN9FQAhkQASIgFCIhFDIgAgIgQyIgBp1q7ZGrZ2aujn78/ajp7v6XUPwaoLfp3eBIzAruJK9RbY3ArbApP12ATbANb+vHTwrkaXz8vgZGKrzd2Cai3gF9sCyMMwBWKU9r4BMOigISETjSIEbIBG+l9dBeEQyobRGx/RoW/Vpknbwq6YnYK5qulM1Xddq2jnYvZMsDiyEmonXDqyEWon/qqm1fm4BK6EhAjmhboHwiKyEuh2kmtYINRP/F9A6/V2EO3gBCKM8GWhSNmkAAAAASUVORK5CYII="/>&nbsp;</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{% url 'purchase' %}">All Products </a>
           {% for category in links %}
@@ -148,7 +150,7 @@
       &nbsp;
       <form action="{% url 'search' %}" class="search" method="GET">
         <div class="input-group w-100">
-          <input class="form-control" type="text" placeholder="Search Here....." name="keyword">
+          <input class="form-control" type="text" placeholder="Search Here....." name="keyword" width="100%">
           <div class="input-group-append">
             <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
           </div>
@@ -162,8 +164,7 @@
             <ul>
             <li><a class="nav-link scrollto" href="{% url 'purchase' %}"><strong>MyShop</strong></a></li>
           
-          <li><a class="nav-link scrollto" href="{% url 'checkout' %}">Checkout</a></li>
-
+          
           
 
            
@@ -212,14 +213,14 @@
       <div class="row d-flex align-items-center">
         <div class="col-lg-6 text-lg-left text-center">
           <div class="copyright">
-            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
+            &copy; Copyright <strong>IHAHO</strong>. All Rights Reserved
           </div>
           <div class="credits">
             <!-- All the links in the footer should remain intact. -->
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="/">ObedPatient</a>
           </div>
         </div>
         <div class="col-lg-6">
@@ -235,7 +236,7 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+ 
   <!-- Vendor JS Files -->
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
@@ -258,9 +259,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
   {% block script %}
 
-
+  
   
   {% endblock script %}
 

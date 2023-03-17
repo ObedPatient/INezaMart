@@ -3,11 +3,44 @@ from django.http import HttpResponse
 from Carts.models import CartItem
 from .forms import OrderForm
 import datetime
-from .models import Order
+from .models import Order, Payment, OrderProduct
+import json
 # Create your views here.
 
 
 def payments(request):
+    text = json.loads(request.body)
+    order = Order.objects.get(user=request.user, is_ordered=False, order_number=text['orderID'])
+    
+    payment = Payment(
+        user = request.user,
+        payment_id = text['transID'],
+        payment_method = text['payment_method'],
+        amount_paid = order.order_total,
+        status = text['status'],
+
+    )
+    payment.save()
+
+    order.payment = payment
+    order.is_ordered = True
+    order.save()
+
+    cart_items = CartItem.objects.filter(user=request.user)
+
+    for item in cart_items:
+       orderproduct = OrderProduct()
+       orderproduct.order_id = order.id
+       orderproduct.payment = payment
+       orderproduct.user_id = request.user.id
+       orderproduct.product_id = item.product_id
+       orderproduct.quantity = item.quantity
+       orderproduct.product_price = item.product.price
+       orderproduct.ordered = True
+       orderproduct.save()
+
+
+     
     return render(request,'orders/payments.html')
 
 

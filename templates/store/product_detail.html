@@ -25,86 +25,93 @@ Myshop
     <div class="container">
         <div class="row">
             
-            
-            <div class="row">
+            <div class="col-lg-6 cart" style="box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <div class="title">
+                    <div class="row">
+                      
+                        <div class="images">
+                            <div class="img-holder">
+                                <img src="{{ single_product.image.url }}" width="540px" height="auto" style="border-radius: 8px;">
+                            </div>
+                        </div>
 
-                <div class="box">
-                    <div class="images">
-                        <div class="img-holder">
-                            <img src="{{ single_product.image.url }}">
-                        </div>
-                        <!--<div class="img-holder">
-                            <img src="imgs/shoe_4.jpg">
-                        </div>
-                        <div class="img-holder">
-                            <img src="imgs/headphone.jpg">
-                        </div>
-                        <div class="img-holder">
-                            <img src="imgs/headphone.jpg">
-                        </div>-->
                     </div>
-                      <form action="{% url 'add_cart' single_product.id %}" method="POST">
-                        {% csrf_token %}
-                    <div class="basic-info">
-                        <h1>{{ single_product.product_name }}</h1>
-                       
-                        <br>
-              
-                        <div class="product-price">RF {{ single_product.price }}</div>
+                </div>    
                 
-                     <div class="description">
-                        <p>{{ single_product.description }}</p>
-                       <hr>
-                        <h5>Choose Color</h5>
-                       <select name="color" class="custom-select" required>
-                        <option value="" disabled selected>Select Color..</option>
-                        {% for c in single_product.variation_set.colors %}
-                        <option value="{{ c.variation_value | lower }}">{{ c.variation_value | capfirst }}</option>
-                        {% endfor %}
-                       </select>
-                      <br><br>
-                      <h5>Select Size</h5>
-                      <select name="size" class="custom-select" required>
-                        <option value="" disabled selected>Select Size..</option>
-                        {% for c in single_product.variation_set.sizes %}
-                        <option value="{{ c.variation_value | lower }}">{{ c.variation_value | capfirst }}</option>
-                        {% endfor %}
-                       </select>
-                      <hr>
-                        <div class="options">
-                            {% if single_product.stock == 0 %}
-                            <h5 class="text-danger">Out Of Stock</h5>
-                            {% else %}
-                            <button type="submit" class="btn btn-primary"><span class="text">Add to Cart</span>&nbsp;<i class="fas fa-shopping-cart"></i></button>
-                            {% endif %}
-                        </div>
-                    </div>
-                  </form>
-                </div>
+            <!--<div class="back-to-shop"><a href="#">&leftarrow;<span class="text-muted mt-4" >Back to shop</span></a></div>-->
             </div>
-                <br><br>
-                <h1>Customer Review</h1>
-                <br>
-                <br>
-                <div class="review">
-                    <div class="rev-info">
-                        <img src="{% static 'assets/imgs/headphone.jpg' %}" alt="">&nbsp;&nbsp;
-                        <h6>Custom Review</h6><br>
-                        
+            <div class="col-lg-6 summary">
+                
+                <form action="{% url 'add_cart' single_product.id %}" method="POST">
+                    {% csrf_token %}
+                <div class="basic-info">
+                    <h1>{{ single_product.product_name }}</h1>
+                   
+                    <br>
+          
+                    <div class="product-price">RF {{ single_product.price }}</div>
+            
+                 <div class="description">
+                    <p>{{ single_product.description }}</p>
+                   <hr>
+                    <h5>Choose Color</h5>
+                   <select name="color" class="custom-select" required>
+                    <option value="" disabled selected>Select Color..</option>
+                    {% for c in single_product.variation_set.colors %}
+                    <option value="{{ c.variation_value | lower }}">{{ c.variation_value | capfirst }}</option>
+                    {% endfor %}
+                   </select>
+                  <br><br>
+                  <h5>Select Size</h5>
+                  <select name="size" class="custom-select" required>
+                    <option value="" disabled selected>Select Size..</option>
+                    {% for c in single_product.variation_set.sizes %}
+                    <option value="{{ c.variation_value | lower }}">{{ c.variation_value | capfirst }}</option>
+                    {% endfor %}
+                   </select>
+                  <hr>
+                    <div class="options">
+                        {% if single_product.stock == 0 %}
+                        <h5 class="text-danger">Out Of Stock</h5>
+                        {% else %}
+                        <button type="submit" class="btn btn-primary"><span class="text">Add to Cart</span>&nbsp;<i class="fas fa-shopping-cart"></i></button>
+                        {% endif %}
                     </div>
-                    <p style="margin: 20px;">orem ipsum, dolor sit amet consectetur adipisicing elit. Natus 
-                        temporibus corporis repudiandae, consectetur nostrum nisi commodi placeat
-                         rerum molestias numquam nihil accusantium deleniti! Enim, nesciunt a quis amet hic officia. 
-                         Lorem ipsum dolor sit amet 
-                        consectetur adipisicing elit. Molestiae nemo accusantium tempora facere doloremque cum iusto, ut nequ</p>
                 </div>
-        
+              </form>
+                
+                
+            </div>
+            
+                
+                
               </div>
         
             
         </div> 
     </div>
 </section>
+<section id="faq" class="faq">
+    <div class="container">
 
+      <div class="section-title" data-aos="fade-up">
+        <h2>CUSTOMER REVIEW</h2>
+      </div>
+
+      <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-5">
+            <img src="{% static 'assets/imgs/headphone.jpg' %}" alt="" width="40px" style="border-radius: 20px;display: inline;">&nbsp;
+            <h6 style="display: inline;">John Saka</h6>
+        </div>
+        <div class="col-lg-7">
+          <p>
+            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+          </p>
+        </div>
+      </div><!-- End F.A.Q Item-->
+
+    
+
+   
 
 {% endblock body %}

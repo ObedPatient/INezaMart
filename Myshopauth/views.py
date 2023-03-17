@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse,redirect
-from django.contrib.auth.models import User
+from Myshopauth.models import Account
 from django.views.generic import View
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages, auth
@@ -49,7 +49,7 @@ def signup(request):
             return render(request, 'auth/signup.html')
         
         try:
-            if User.objects.get(username=email):
+            if Account.objects.get(username=email):
                 messages.warning(request, "Email is Taken")
                 return render(request,'auth/signup.html')
 
@@ -57,7 +57,7 @@ def signup(request):
             pass
 
 
-        user = User.objects.create_user(email,email,password)
+        user = Account.objects.create_user(email,email,password)
         user.is_active=False
         user.save()
         current_site= get_current_site(request)
@@ -83,7 +83,7 @@ class ActivateAccountView(View):
     def get(self,request,uidb64,token):
         try:
             uid= force_text(urlsafe_base64_decode(uidb64))
-            user=User.objects.get(pk=uid)
+            user=Account.objects.get(pk=uid)
         except Exception as identifier:
             user=None
 
@@ -190,7 +190,7 @@ class RequestRestEmailView(View):
 
     def post(self,request):
         email=request.POST['email']
-        user=User.objects.filter(email=email)
+        user=Account.objects.filter(email=email)
 
         if user.exists():
             current_site=get_current_site(request)
@@ -217,7 +217,7 @@ class SetNewPasswordView(View):
         }
         try:
             user_id=force_text(urlsafe_base64_decode(uidb64))
-            user=User.objects.get(pk=user_id)
+            user=Account.objects.get(pk=user_id)
 
             if not PasswordResetTokenGenerator().check_token(user,token):
                 messages.warning(request,"Password Reset Link is Invalid")
@@ -241,7 +241,7 @@ class SetNewPasswordView(View):
 
         try:
             user_id=force_text(urlsafe_base64_decode(uidb64))
-            user=User.objects.get(pk=user_id)
+            user=Account.objects.get(pk=user_id)
             user.set_password(password)
             user.save()
             messages.success(request,'Password Reset Success Please Login with New Password')
