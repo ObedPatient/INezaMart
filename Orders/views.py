@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from Carts.models import CartItem
 from .forms import OrderForm
 import datetime
+from Myshopapp.models import Variation, Product
 from .models import Order, Payment, OrderProduct
 import json
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 # Create your views here.
 
 
@@ -28,20 +31,54 @@ def payments(request):
 
     cart_items = CartItem.objects.filter(user=request.user)
 
+    
     for item in cart_items:
-       orderproduct = OrderProduct()
-       orderproduct.order_id = order.id
-       orderproduct.payment = payment
-       orderproduct.user_id = request.user.id
-       orderproduct.product_id = item.product_id
-       orderproduct.quantity = item.quantity
-       orderproduct.product_price = item.product.price
-       orderproduct.ordered = True
-       orderproduct.save()
+        orderproduct = OrderProduct()
+        orderproduct.order_id = order.id
+        orderproduct.payment = payment
+        orderproduct.user_id = request.user.id
+        orderproduct.product_id = item.product_id
+        orderproduct.quantity = item.quantity
+        orderproduct.product_price = item.product.price
+        orderproduct.ordered = True
+        orderproduct.save()
 
+        cart_item = CartItem.objects.get(id=item.id)
+        product_variation = cart_item.variations.all()
+        orderproduct = OrderProduct.objects.get(id=orderproduct.id)
+        orderproduct.variations.set(product_variation)
+        orderproduct.save()
+
+
+        #  Reduce Quantity of sold products
+
+        product = Product.objects.get(id=item.product_id)
+        product.stock -= item.quantity
+        product.save()
+    # clear CartItem 
+
+    CartItem.objects.filter(user=request.user).delete()
+
+    # send order received email to customer 
+    
+    mail_subject = 'Thank you for your order!'
+    message = render_to_string('orders/order_received_email.html', {
+        'user': request.user,
+        'order': order,
+    })
+    to_email = request.user.email
+    send_email = EmailMessage(mail_subject, message, to=[to_email])
+    send_email.send()
+    
+    # Send order number and transaction id back to sendData method via JsonResponse
+
+    data = {
+        'order_number': order.order_number,
+        'transID': payment.payment_id,
+    }
 
      
-    return render(request,'orders/payments.html')
+    return JsonResponse(data)
 
 
 
@@ -104,3 +141,7 @@ def place_order(request, total=0, quantity=0):
             return render(request, 'orders/payments.html', context)
     else:
         return redirect('checkout')
+
+
+def order_complete(request):
+    return render(request, 'orders/order_complete.html') 
