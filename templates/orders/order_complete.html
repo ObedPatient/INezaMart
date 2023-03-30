@@ -43,10 +43,10 @@ Order Complete
                             <div class="invoice-from">
                                 <ul class="list-unstyled text-right">
                                     <li><strong>Invoiced To</strong></li>
-                                    <li>#</li>
-                                    <li>#</li>
-                                    <li>#</li>
-                                    <li>#</li>
+                                    <li>{{ order.full_name }}</li>
+                                    <li>{{ order.full_address }}</li>
+                                    <li>{{ order.city}}, {{ order.state}}</li>
+                                    <li>{{ order.country }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -56,10 +56,10 @@ Order Complete
                             <div class="invoice-details mt25">
                                 <div class="well">
                                     <ul class="list-unstyled mb0">
-                                        <li><strong>Order</strong> #</li>
-                                        <li><strong>Transaction ID</strong> #</li>
-                                        <li><strong>Order Date:</strong> #</li>
-                                        <li><strong>Status:</strong> #</li>
+                                        <li><strong>Order</strong> #{{ order_number }}</li>
+                                        <li><strong>Transaction ID</strong> {{ transID }}</li>
+                                        <li><strong>Order Date:</strong> {{ order.created_at }}</li>
+                                        <li><strong>Status:</strong> {{ payment.status }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -75,31 +75,26 @@ Order Complete
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
+                                          {% for item in ordered_products %}
                                             <tr>
-                                                <td>Inkweto
+                                                <td>{{ item.product.product_name }}
                                                   <p class="text-muted small">
-                                          				
-                                          				</p>
+                                                        {% if item.variations.all %}
+                                                            {% for i in item.variations.all %}
+                                                                {{ i.variation_category | capfirst }} : {{ i.variation_value | capfirst }} <br>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                       				</p>
                                                 </td>
-                                                <td class="text-center">34</td>
-                                                <td class="text-center">$43 USD</td>
+                                                <td class="text-center">{{ item.quantity }}</td>
+                                                <td class="text-center">${{ item.product_price }} RWF</td>
                                             </tr>
-                                          
+                                          {% endfor %}
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="2" class="text-right">Sub Total:</th>
-                                                <th class="text-center">$46 USD</th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2" class="text-right">Tax:</th>
-                                                <th class="text-center">$354 USD</th>
-                                            </tr>
-
-                                            <tr>
-                                                <th colspan="2" class="text-right">Grand Total:</th>
-                                                <th class="text-center">$ 123 USD</th>
+                                                <th colspan="2" class="text-right">Total Price:</th>
+                                                <th class="text-center">$ {{ total }} RWF</th>
                                             </tr>
                                         </tfoot>
                                     </table>
