@@ -46,10 +46,20 @@ Myshop
                     {% csrf_token %}
                 <div class="basic-info">
                     <h1>{{ single_product.product_name }}</h1>
-                   
+                    <div class="rating-star">
+                      <span>
+                        <i class="fa fa-star{% if single_product.averageReview < 0.5 %}-o{% elif single_product.averageReview >= 0.5 and single_product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if single_product.averageReview < 1.5 %}-o{% elif single_product.averageReview >= 1.5 and single_product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if single_product.averageReview < 2.5 %}-o{% elif single_product.averageReview >= 2.5 and single_product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if single_product.averageReview < 3.5 %}-o{% elif single_product.averageReview >= 3.5 and single_product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if single_product.averageReview < 4.5 %}-o{% elif single_product.averageReview >= 4.5 and single_product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+                      </span>
+                      &nbsp;<span>{{single_product.countReview}} reviews</span>
+                    </div>
+                    
                     <br>
           
-                    <div class="product-price">RF {{ single_product.price }}</div>
+                    <div class="product-price" style="color: black;">RF {{ single_product.price }}</div>
             
                  <div class="description">
                     <p>{{ single_product.description }}</p>
@@ -91,7 +101,7 @@ Myshop
         </div> 
     </div>
 </section>
-<section id="faq" class="faq">
+<section id="faq" class="section-content padding-y">
     <div class="container">
 
       
@@ -100,6 +110,15 @@ Myshop
         <form action="{% url 'submit_review' single_product.id %}" method="POST">
           {% csrf_token %}
           <h5>Write Your Review</h5>
+          <div class="rating-star">
+            <span>
+              <i class="fa fa-star{% if single_product.averageReview < 0.5 %}-o{% elif single_product.averageReview >= 0.5 and single_product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+              <i class="fa fa-star{% if single_product.averageReview < 1.5 %}-o{% elif single_product.averageReview >= 1.5 and single_product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+              <i class="fa fa-star{% if single_product.averageReview < 2.5 %}-o{% elif single_product.averageReview >= 2.5 and single_product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+              <i class="fa fa-star{% if single_product.averageReview < 3.5 %}-o{% elif single_product.averageReview >= 3.5 and single_product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+              <i class="fa fa-star{% if single_product.averageReview < 4.5 %}-o{% elif single_product.averageReview >= 4.5 and single_product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+            </span>
+          </div>
           <div>
             <!-- rating Stars-->
   
@@ -124,30 +143,66 @@ Myshop
             <textarea name="review" rows="4" class="form-control"></textarea>
             <br>
             {% if user.is_authenticated %}
-            <button type="submit" value="" class="btn btn-primary">submit REVIEW</button>
+              {% if orderproduct %}
+                <button type="submit" value="" class="btn btn-primary">submit REVIEW</button>
+              {% else %}
+              <p>You Must Purchase The Product To Post a Review</p>
+              {% endif %}
             {% else %}
               <p>You must be logged in to Submit Review <span><a href="{%url 'handlelogin' %}">Login Now</a></span></p>
             {% endif %}
           </div>
         </form>
+        <br>
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong></strong>{{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
       </div>
       <br>
       <div class="section-title" data-aos="fade-up">
         <h2>CUSTOMER REVIEW</h2>
+        <div class="rating-star">
+          <span>
+            <i class="fa fa-star{% if single_product.averageReview < 0.5 %}-o{% elif single_product.averageReview >= 0.5 and single_product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star{% if single_product.averageReview < 1.5 %}-o{% elif single_product.averageReview >= 1.5 and single_product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star{% if single_product.averageReview < 2.5 %}-o{% elif single_product.averageReview >= 2.5 and single_product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star{% if single_product.averageReview < 3.5 %}-o{% elif single_product.averageReview >= 3.5 and single_product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star{% if single_product.averageReview < 4.5 %}-o{% elif single_product.averageReview >= 4.5 and single_product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+          </span>
+          &nbsp;<span>{{single_product.countReview}} reviews</span>
+        </div>
+        
       </div> 
+{% for review in reviews %}
       <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-5">
             <img src="{% static 'assets/imgs/headphone.jpg' %}" alt="" width="40px" style="border-radius: 20px;display: inline;">&nbsp;
-            <h6 style="display: inline;">John Saka</h6>
+            <h6 style="display: inline-block;">{{ review.user.full_name }}</h6>
+            <div style="margin-left: 46px;" class="rating-star mb-0">
+              <span>
+                <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+              </span>
+                  
+            </div>
         </div>
         <div class="col-lg-7">
+          <span class="date text-muted float-md-right">{{review.updated_at}} </span>
+          <h6><strong>{{ review.subject }}</strong></h6>
+          <br>
           <p>
-            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+            {{ review.review}}
           </p>
         </div>
-      </div><!-- End F.A.Q Item-->
-
-    
+      </div>
+      <hr>
+{% endfor %}
 
    
 

@@ -26,6 +26,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.decorators import login_required
 from Carts.views import _cart_id
 from Carts.models import Cart, CartItem
+from Orders.models import Order
 # threading
 import requests
 import threading
@@ -257,7 +258,21 @@ class SetNewPasswordView(View):
 
 @login_required(login_url = 'login')
 def dashboard(request):
-    return render(request, 'auth/dashboard.html' )
+    order = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    order_count = order.count()
+
+    context = {
+        'order_count': order_count,
+    }
+    return render(request, 'auth/dashboard.html', context )
 
          
 
+
+
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    context = {
+        'orders':orders,
+    }
+    return render(request, 'auth/my_orders.html',context)

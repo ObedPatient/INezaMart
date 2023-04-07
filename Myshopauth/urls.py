@@ -10,4 +10,6 @@ urlpatterns = [
     path('set-new-password/<uidb64>/<token>', views.SetNewPasswordView.as_view(),name='set-new-password'),
     path('dashboard/', views.dashboard, name='dashboard'),
     
+
+    path('my_orders/', views.my_orders, name='my_orders'),
 ]
