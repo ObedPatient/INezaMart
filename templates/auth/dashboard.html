@@ -20,7 +20,7 @@ Myshop
             <main class="col-md-9">
                 <article class="card">
                     <header class="card-header">
-                        <strong class="d-inline-block mr-3">Looged As: </strong>
+                        <strong class="d-inline-block mr-3">Logged In As: </strong>
                         <span>{{ user.full_name }}</span> 
                     </header>
                     <div class="card-body">
@@ -30,7 +30,7 @@ Myshop
                                     <div class="card-body" style="text-align: center;">
                                         <h5 class="card-title"> Total Orders</h5>
                                         <h4>{{order_count}}</h4>
-                                        <a href="">View Orders</a>
+                                        <a href="{% url 'my_orders' %}">View Orders</a>
                                     </div>
                                 </div>
                             </div>

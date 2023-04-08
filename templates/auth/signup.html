@@ -12,50 +12,70 @@ Myshop
 
 {% block body %}
 
-<section id="contact" class="contact">
-    <div class="container">
+<section class="section-content padding-y">
 
-      <div class="section-title" data-aos="fade-up">
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+        <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+          <article class="card-body">
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong></strong>{{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            <header class="mb-4" style="text-align: center;"><h4 class="card-title">Sign up</h4></header>
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
 
-<div class="row">
-<div class="col-md-2"></div>
-<div class="col-md-4">
-    <br><br>
-    <h1 data-aos="fade-up">Signup</h1>
-<div class="container" data-aos="fade-up" data-aos-delay="400">
-
-    {% for message in messages %}
-    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-        <strong></strong>{{message}}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %}
-<form action="/Myshopauth/signup/" method="post">
-    {% csrf_token %}
-    <br>
-    <label for="email">E-mail</label>
-    <div class="form-group">
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
-    </div>
-    <label for="pass1">Password</label>
-    <div class="form-group">
-        <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter Password" required>
-    </div>
-    <label for="pass2">Confirm Password</label>
-    <div class="">
-        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Password" required>
-    </div>
-    <br><br>
-    <button type="submit" class="btn btn-primary">Signup</button>
-
-    <hr>
-    Already User? <a href="/Myshopauth/login/">Login</a>
-    <br>
-</form>
-</div>
-
-
-
+    
+                    
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>First name</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required>
+                        </div> <!-- form-group end.// -->
+                        <div class="col form-group">
+                            <label>Last name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required>
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
+    
+    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Email Address</label>
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group col-md-6">
+                          <label>Phone Number</label>
+                          <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter Phone Number" required>
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Create password</label>
+                            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter Paswword" required>
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group col-md-6">
+                            <label>Repeat password</label>
+                            <input type="password" class="form-control" id="pass1" name="pass2" placeholder="Confirm Password" required>
+                        </div> <!-- form-group end.// -->
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                    </div> <!-- form-group// -->
+          
+          
+                </form>
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4">Have an account? <a href="{% url 'handlelogin' %}">Log In</a></p>
+        <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+    
+    
+    </section>
+    
 
 
 </div>

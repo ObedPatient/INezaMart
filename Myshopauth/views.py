@@ -31,6 +31,7 @@ from Orders.models import Order
 import requests
 import threading
 
+
 class EmailThread(threading.Thread):
     def __init__(self,email_message):
         self.email_message=email_message
@@ -42,15 +43,20 @@ class EmailThread(threading.Thread):
 
 def signup(request):
     if request.method=="POST":
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
         email=request.POST['email']
+        phone_number = request.POST['phone_number']
         password=request.POST['pass1']
         confirm_password=request.POST['pass2']
+        username = email.split('@')[0]
+
         if password!=confirm_password:
             messages.warning(request, "Password Is Not Matching")
             return render(request, 'auth/signup.html')
         
         try:
-            if Account.objects.get(username=email):
+            if Account.objects.filter(email=email).exists():
                 messages.warning(request, "Email is Taken")
                 return render(request,'auth/signup.html')
 
@@ -58,7 +64,7 @@ def signup(request):
             pass
 
 
-        user = Account.objects.create_user(email,email,password)
+        user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
         user.is_active=False
         user.save()
         current_site= get_current_site(request)
@@ -77,7 +83,6 @@ def signup(request):
         EmailThread(email_message).start()
         messages.info(request, "Activate Your Account By Clicking link on your Email")
         return redirect('/Myshopauth/login')
-
     return render(request, 'auth/signup.html')
 
 class ActivateAccountView(View):
