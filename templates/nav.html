@@ -147,26 +147,33 @@
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>&nbsp;&nbsp;
-      <button class="nav-item dropdown btn btn-outline-primary">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANBJREFUSEvFlO0RAUEQRN9FQAhkQASIgFCIhFDIgAgIgQyIgBp1q7ZGrZ2aujn78/ajp7v6XUPwaoLfp3eBIzAruJK9RbY3ArbApP12ATbANb+vHTwrkaXz8vgZGKrzd2Cai3gF9sCyMMwBWKU9r4BMOigISETjSIEbIBG+l9dBeEQyobRGx/RoW/Vpknbwq6YnYK5qulM1Xddq2jnYvZMsDiyEmonXDqyEWon/qqm1fm4BK6EhAjmhboHwiKyEuh2kmtYINRP/F9A6/V2EO3gBCKM8GWhSNmkAAAAASUVORK5CYII="/>&nbsp;</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{% url 'purchase' %}">All Products </a>
-          {% for category in links %}
-           <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
-          {% endfor %}
-        </div>
-      </button>
-      &nbsp;
-      <form action="{% url 'search' %}" class="search" method="GET">
-        <div class="input-group w-100">
-          <input class="form-control" type="text" placeholder="Search Here....." name="keyword" width="100%">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+      <div class="col-lg col-sm col-md col-6 flex-grow-0">
+        <div class="category-wrap dropdown d-inline-block float-right">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-bars"></i> All category
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'purchase' %}">All Products </a>
+            {% for category in links %}
+              <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }} </a>
+            {% endfor %}
           </div>
-          
-        </div>
-        
-      </form>
+        </div>  <!-- category-wrap.// -->
+      </div> <!-- col.// -->
+      &nbsp;
+      <div class="col-lg  col-md-6 col-sm-12 col">
+        <form action="{% url 'search' %}" class="search" method='GET'>
+          <div class="input-group w-100">
+              <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword">
+    
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+        </form> <!-- search-wrap .end// -->
+      </div> <!-- col.// -->
       
     
       <nav id="navbar" class="navbar">

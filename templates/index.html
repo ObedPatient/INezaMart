@@ -224,27 +224,40 @@ a
             
 
                 <div class="row">
-                    {% for product in products %}
-                    <div class="col-md-12 col-lg-4 mb-2 mb-lg-4">
-                        <div class="card">
-                            <a href="{{ product.get_url }}"><img src="{{ product.image.url }}"
-                            class="card-img-top" alt="" /></a>
-                          <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <p class="small"><a href="#!" class="text-muted">{{ product.category }}</a></p>
-                              <a href="{{ product.get_url }}"><i class="fas fa-eye"></i></a>
-                            </div>
-                
-                            <div class="d-flex justify-content-between mb-3">
-                                <a href="{{ product.get_url }}"><h5 class="mb-0">{{ product.product_name }}</h5></a>
-                              <h5 class="text-dark mb-0">${{ product.price }}</h5>
+                    {% if products %}
+                 {% for p in products %}
+                    <div class="col-lg-4">
+                        <div class="product-card">
+                            <div class="badge">Hot</div>
+                            <a href="{{ p.get_url }}">
+                                <div class="product-tumb">
+                                    <img src="{{ p.image.url }}" alt="">
+                                </div>
+                            </a>
+                            
+                            <div class="product-details">
+                                <span class="product-catagory">{{ p.category }}</span>
+                                <h4><a href="{{ p.get_url }}">{{ p.product_name }}</a></h4>
+                                <p>{{ p.description }}</p>
+                                <div class="product-bottom-details">
+                                    <div class="product-price">RF{{ p.price }}</div>
+                                    <div class="product-links">
+                                      <!--<a href=""><i class="fa fa-heart"></i></a>-->
+                                        <a href="{{ p.get_url }}"><i class="fas fa-eye"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                          </div>
-                          
                     </div>
-                    <br>
                     {% endfor %}
+                    {% else %}
+                    <div>
+                        <h2>No Results Found. Please try Again</h2>
+                    </div>
+                    {% endif %}
+             
+                   
+                </div>
              
             
         </div> 

@@ -1,0 +1,104 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+
+Myshop
+
+{% endblock title %}
+
+{% block style%}
+
+{% endblock style %}
+
+{% block body %}
+
+<section class="section-content padding-y">
+    
+    <div class="container">
+
+        <br><br>
+        {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                        <strong></strong>{{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+        <div class="row">
+            {% include 'includes/dashboard_aside.html' %}
+            <main class="col-md-9">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Edit Profile </strong>
+                       
+                    </header>
+                    
+                    <div class="card-body">
+                        <div class="text-right">
+                            <img src="{{ userprofile.profile_picture.url }}" alt="Profile picture" width="80" style="border-radius: 50%;border:1px solid black;">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>First Name</label>
+                                            {{ user_form.first_name }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Last Name</label>
+                                            {{ user_form.last_name }}
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Phone Number</label>
+                                            {{ user_form.phone_number }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Profile Picture</label>
+                                            {{ profile_form.profile_picture }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address Line 1</label>
+                                        {{ profile_form.address_line_1 }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address Line 2</label>
+                                        {{ profile_form.address_line_2 }}
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label>City</label>
+                                            {{ profile_form.city }}
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Province</label>
+                                            {{ profile_form.province }}
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Country</label>
+                                            {{ profile_form.country }}
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" value="SAVE" class="btn btn-primary btn-block">
+
+                                </form>
+
+
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+
+
+{% endblock body %}
