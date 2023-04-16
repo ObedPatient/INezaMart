@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+
 
 # Create your models here.
 
@@ -61,6 +66,7 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = ['username','first_name','last_name']
 
     objects = MyAccountManager()
+    
 
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
@@ -85,7 +91,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     address_line_1 = models.CharField(blank=True,max_length=100)
     address_line_2 = models.CharField(blank=True,max_length=100)
-    profile_picture = models.ImageField(blank=True, upload_to='userprofile')
+    profile_picture = models.ImageField(blank=True, upload_to='userprofile',default='default_profile_picture.jpg',)
     city = models.CharField(blank=True, max_length=20)
     province = models.CharField(blank=True, max_length=20)
     country = models.CharField(blank=True, max_length=20)
@@ -95,6 +101,19 @@ class UserProfile(models.Model):
     
     def full_address(self):
         return f'{self.address_line_1} {self.address_line_2}'
+    
+    def profile_picture_url(self):
+        if self.profile_picture and hasattr(self.profile_picture, 'url') and self.profile_picture.storage.exists(self.profile_picture.name):
+            return self.profile_picture.url
+        else:
+            return ''
+
+        
+        
+@receiver(post_save, sender=Account)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
     
 
     

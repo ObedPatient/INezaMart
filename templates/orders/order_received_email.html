@@ -1,9 +1,14 @@
 {% autoescape off %}
 
-Hi {{user.first_name}},
+Hi {{user.full_name}},
 
 YOUR ORDER HAS BEEN RECIEVED
 
 Order Number: {{order.order_number}}
+Payment ID: {{ order.payment.payment_id }}
+Data Created: {{ order.created_at }}
+Payment Status: {{ order.payment.status }}
+
+
 
 {% endautoescape %}

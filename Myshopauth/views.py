@@ -27,7 +27,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.decorators import login_required
 from Carts.views import _cart_id
 from Carts.models import Cart, CartItem
-from Orders.models import Order
+from Orders.models import Order, OrderProduct
 # threading
 import requests
 import threading
@@ -330,3 +330,17 @@ def change_password(request):
         else:
             messages.error(request, 'Password Does Not Match')
     return render(request, 'auth/change_password.html' )
+
+@login_required(login_url = 'login')
+def order_detail(request, order_id):
+    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+    order = Order.objects.get(order_number=order_id)
+    total = 0 
+    for i in order_detail:
+        total += i.product_price * i.quantity
+    context = {
+        'order_detail': order_detail,
+        'order': order,
+        'total': total,
+    }
+    return render(request, 'auth/order_detail.html', context)
